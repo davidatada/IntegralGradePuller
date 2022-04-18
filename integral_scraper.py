@@ -55,6 +55,13 @@ default_data = [
   ('itemids[5136]', '0'),
   ('itemids[5142]', '0'),
   ('itemids[5118]', '0'),
+  ('itemids[5194]', '0'),
+  ('itemids[5195]', '0'),
+  ('itemids[1806]', '0'),
+  ('itemids[5197]', '0'),
+  ('itemids[5148]', '0'),
+  ('itemids[5159]', '0'),
+  ('itemids[5153]', '0'),
   ('itemids[1]', '0'),
   ('display[real]', '1'),
   ('decimals', '2'),
@@ -68,6 +75,16 @@ courses={'course_AL_PURE':
                 'ma2022':'75238',
                 'ma2123':'99166'
             }},
+        'course_AS_STATISTICS':
+                    {'id':'5','groups':{
+                        'ma2022':'75240',
+                        'ma2123':'98735'
+                    }},
+        'course_AS_MECHANICS':
+                    {'id':'4','groups':{
+                        'ma2022':'75239',
+                        'ma2123':'98734'
+                    }},
         'course_AS_PURE':
             {'id':'2','groups':{
                 'ma2022':'75237',
@@ -122,4 +139,5 @@ def download_grades(course_name, group_name, tests_needed):
         data.append(('sesskey',get_sess_key(l.text)))
         grades_download = s.post('https://my.integralmaths.org/grade/export/txt/export.php', headers=headers, data=data)
 
+    #print(grades_download.text)
     return grades_download.content

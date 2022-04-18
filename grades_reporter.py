@@ -12,15 +12,15 @@ def get_test_code(label, topics):
 
 # turns the grade report from integral into a nicely formatted dataframe
 def get_grade_report(course_name, group_name, modules):
-    grades=pd.read_csv(io.StringIO(integral_scraper.download_grades(course_name,group_name,modules).decode('utf-8')), index_col='Email address', na_values=['-'])
-    grades.drop(['ID number','Institution','Department','Last downloaded from this course'], axis=1, inplace=True)
+    grades=pd.read_csv(io.StringIO(integral_scraper.download_grades(course_name,group_name,modules).decode('utf-8')), index_col='Username', na_values=['-'])
+    grades.drop(['Last downloaded from this course'], axis=1, inplace=True)
     grades.rename(columns=lambda x: get_test_code(x,integral_scraper.get_course_info(course_name)), inplace=True)
     #print(grades.dtypes)
     return grades
 
 # generate a list of the test grades a student is missing
-def missing_grades_from_email(email, grade_table):
-    return missing_grades_from_row(grade_table.loc[email], grade_table)
+def missing_grades_from_uname(uname, grade_table):
+    return missing_grades_from_row(grade_table.loc[uname], grade_table)
 
 def missing_grades_from_row(row, grade_table):
     return [code for code in grade_table.columns if pd.isna(row[code])]
